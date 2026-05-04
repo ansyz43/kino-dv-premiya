@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дальневосточная Кинопремия 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --amber:      #FF9500;
+  --amber2:     #FFD000;
+  --red:        #E8341A;
+  --deep:       #0A0A0F;
+  --dark:       #0E0E16;
+  --mid:        #161620;
+  --card:       #13131C;
+  --border:     rgba(255,149,0,0.15);
+  --border-w:   rgba(255,255,255,0.08);
+  --text:       #E8E4DC;
+  --muted:      #5A5770;
+  --white:      #fff;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden}
+
+/* ═══════════ NOISE OVERLAY ═══════════ */
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.025;
+  mix-blend-mode:overlay;
+}
+
+/* ═══════════ NAV ═══════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 52px;height:68px;
+  background:rgba(10,10,15,0.88);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,149,0,0.2);
+}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.nav-beacon{
+  position:relative;width:12px;height:12px;flex-shrink:0
+}
+.nav-beacon .core{
+  position:absolute;inset:0;
+  background:radial-gradient(circle,#FFD000 0%,#FF9500 60%);
+  border-radius:50%;
+  box-shadow:0 0 12px 4px rgba(255,149,0,0.8),0 0 30px 10px rgba(255,149,0,0.35);
+  animation:beacon 2s ease-in-out infinite;
+}
+.nav-beacon .ring{
+  position:absolute;inset:-5px;
+  border:1px solid rgba(255,149,0,0.4);
+  border-radius:50%;
+  animation:ring-out 2s ease-in-out infinite;
+}
+@keyframes beacon{
+  0%,100%{box-shadow:0 0 12px 4px rgba(255,149,0,0.8),0 0 30px 10px rgba(255,149,0,0.35)}
+  50%{box-shadow:0 0 18px 7px rgba(255,208,0,0.9),0 0 50px 18px rgba(255,149,0,0.5)}
+}
+@keyframes ring-out{
+  0%{transform:scale(1);opacity:0.6}
+  100%{transform:scale(2.4);opacity:0}
+}
+.nav-wordmark{display:flex;flex-direction:column;line-height:1}
+.nav-wordmark .top{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.36em;color:var(--amber);text-transform:uppercase;opacity:0.85}
+.nav-wordmark .bot{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.1em;color:var(--white);background:linear-gradient(90deg,#fff 0%,#FFD000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links a{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.22em;color:rgba(255,255,255,0.78);text-decoration:none;text-transform:uppercase;transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:var(--amber2)}
+.nav-cta{
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;
+  color:var(--deep) !important;font-weight:700;
+  background:linear-gradient(135deg,#FFD000 0%,#FF9500 100%);
+  padding:14px 26px;text-decoration:none;
+  box-shadow:0 0 24px rgba(255,149,0,0.5),0 4px 16px rgba(255,149,0,0.25);
+  transition:box-shadow .2s,transform .15s;
+}
+.nav-cta:hover{box-shadow:0 0 40px rgba(255,208,0,0.7),0 6px 20px rgba(255,149,0,0.35);transform:translateY(-1px)}
+
+/* ═══════════ HERO ═══════════ */
+.hero{
+  position:relative;min-height:100vh;
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+  align-items:center;gap:80px;
+  padding:120px 80px 80px;overflow:hidden;
+}
+
+/* Многослойный фон */
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+
+/* тёмно-синяя дымка сзади */
+.hero-bg .layer-base{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 90% 100% at 0% 50%,#1a0a2e 0%,transparent 60%),
+             radial-gradient(ellipse 60% 80% at 100% 80%,#1e0800 0%,transparent 55%);
+}
+/* сетка кинопленки */
+.hero-bg .layer-grid{
+  position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(90deg,transparent,transparent 99px,rgba(255,149,0,0.04) 99px,rgba(255,149,0,0.04) 100px),
+    repeating-linear-gradient(0deg,transparent,transparent 99px,rgba(255,149,0,0.03) 99px,rgba(255,149,0,0.03) 100px);
+}
+/* главный луч */
+.hero-bg .layer-ray{
+  position:absolute;left:76px;top:50%;transform:translateY(-50%);
+  width:0;height:0;
+  border-top:420px solid transparent;
+  border-bottom:420px solid transparent;
+  border-left:1100px solid rgba(255,149,0,0.055);
+  filter:blur(22px);
+}
+.hero-bg .layer-ray2{
+  position:absolute;left:76px;top:50%;transform:translateY(-50%);
+  width:0;height:0;
+  border-top:160px solid transparent;
+  border-bottom:160px solid transparent;
+  border-left:900px solid rgba(255,208,0,0.07);
+  filter:blur(8px);
+}
+/* яркое пятно у источника */
+.hero-bg .layer-glow{
+  position:absolute;left:60px;top:50%;transform:translateY(-50%);
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(255,208,0,0.18) 0%,rgba(255,149,0,0.08) 40%,transparent 70%);
+  filter:blur(4px);
+}
+
+/* HERO CONTENT */
+.hero-content{position:relative;z-index:2;max-width:760px}
+
+.hero-eyebrow{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+.h-dot{
+  width:14px;height:14px;flex-shrink:0;border-radius:50%;
+  background:radial-gradient(circle,#FFD000 0%,#FF9500 70%);
+  box-shadow:0 0 20px 7px rgba(255,149,0,0.75),0 0 60px 20px rgba(255,149,0,0.3);
+  animation:beacon 2s ease-in-out infinite;
+}
+.hero-eyebrow span{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.4em;color:var(--amber);text-transform:uppercase}
+
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(60px,8.5vw,108px);
+  letter-spacing:0.02em;line-height:0.92;
+  color:var(--white);margin-bottom:24px;
+}
+.hero-title .accent{
+  background:linear-gradient(135deg,#FFD000 0%,#FF9500 50%,#E8341A 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-title .outline{
+  -webkit-text-stroke:2px rgba(255,255,255,0.15);
+  color:transparent;
+}
+
+.hero-sub{
+  font-family:'Cormorant Garamond',serif;font-weight:400;font-style:italic;
+  font-size:clamp(18px,1.8vw,24px);
+  color:rgba(255,255,255,0.6);letter-spacing:0.05em;margin-bottom:44px;
+}
+
+.hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.btn-primary{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--deep);
+  background:linear-gradient(135deg,#FFD000 0%,#FF9500 100%);
+  padding:18px 36px;text-decoration:none;
+  box-shadow:0 0 30px rgba(255,149,0,0.5),0 8px 32px rgba(255,149,0,0.3);
+  transition:transform .15s,box-shadow .2s;display:inline-block;
+  border:none;cursor:pointer;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 44px rgba(255,208,0,0.7),0 12px 40px rgba(255,149,0,0.4)}
+.btn-ghost{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--white);
+  border:1px solid rgba(255,149,0,0.35);
+  padding:17px 36px;text-decoration:none;
+  transition:border-color .2s,background .2s;display:inline-block;
+  background:rgba(255,149,0,0.05);
+}
+.btn-ghost:hover{border-color:var(--amber);background:rgba(255,149,0,0.1)}
+
+/* HERO ASIDE — правая колонка */
+.hero-aside{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;gap:24px;
+  width:100%;
+}
+.hero-aside-tag{
+  display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.3em;
+  color:var(--amber2);text-transform:uppercase;
+  border:1px solid rgba(255,149,0,0.3);
+  padding:8px 14px;background:rgba(255,149,0,0.05);
+}
+.hero-aside-tag::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--amber);box-shadow:0 0 10px var(--amber);
+  animation:beacon 2s ease-in-out infinite;
+}
+
+/* STATS — вертикальный фильмстрип */
+.hero-stats{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;
+  border:1px solid rgba(255,149,0,0.18);
+  background:linear-gradient(180deg,rgba(20,12,4,0.55) 0%,rgba(8,6,12,0.55) 100%);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.hero-stats::before,.hero-stats::after{
+  content:'';position:absolute;left:0;right:0;height:14px;
+  background-image:repeating-linear-gradient(90deg,
+    transparent 0,transparent 10px,
+    rgba(255,149,0,0.25) 10px,rgba(255,149,0,0.25) 18px,
+    transparent 18px,transparent 28px);
+  opacity:0.6;
+}
+.hero-stats::before{top:0;border-bottom:1px solid rgba(255,149,0,0.15)}
+.hero-stats::after{bottom:0;border-top:1px solid rgba(255,149,0,0.15)}
+.hero-stats > .stat-item{
+  position:relative;
+  display:flex;align-items:baseline;justify-content:space-between;gap:24px;
+  padding:28px 32px;
+  border-bottom:1px solid rgba(255,149,0,0.08);
+}
+.hero-stats > .stat-item:first-child{padding-top:42px}
+.hero-stats > .stat-item:last-child{padding-bottom:42px;border-bottom:none}
+.stat-num{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(54px,5.5vw,76px);line-height:0.95;letter-spacing:0.02em;
+  background:linear-gradient(135deg,#FFD000 0%,#FF9500 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 24px rgba(255,149,0,0.35));
+  flex:0 0 auto;
+}
+.stat-label{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.28em;
+  color:rgba(255,255,255,0.7);text-transform:uppercase;
+  text-align:right;line-height:1.5;
+  flex:1 1 auto;
+}
+
+.hero-aside-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.32em;
+  color:rgba(255,255,255,0.45);text-transform:uppercase;
+  padding:0 4px;
+}
+.hero-aside-meta strong{color:var(--amber2);font-weight:400}
+
+/* scroll */
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center}
+.scroll-line{width:1px;height:52px;background:linear-gradient(to bottom,rgba(255,149,0,0.6),transparent);animation:scrollAnim 1.8s ease-in-out infinite}
+@keyframes scrollAnim{0%,100%{opacity:0.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.1)}}
+
+/* ═══════════ ANNOUNCEMENT BAND ═══════════ */
+.band{
+  background:linear-gradient(90deg,#FF9500 0%,#FFD000 50%,#FF9500 100%);
+  background-size:200% 100%;
+  animation:bandShimmer 3s linear infinite;
+  padding:14px 52px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  position:relative;z-index:10;
+}
+@keyframes bandShimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.band p,.band a{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.28em;color:var(--deep);text-transform:uppercase}
+.band a{text-decoration:underline;white-space:nowrap}
+
+/* ═══════════ SECTION BASE ═══════════ */
+section{padding:100px 80px}
+.section-eyebrow{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.42em;color:var(--amber2);text-transform:uppercase;margin-bottom:16px}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,82px);letter-spacing:0.03em;color:var(--white);line-height:0.95;margin-bottom:24px;
+}
+/* — подсветка ключевого слова при входе в viewport — */
+.hl{
+  color:var(--white);
+  -webkit-text-fill-color:rgba(255,255,255,0.92);
+  background:none;
+  transition:color .9s ease,-webkit-text-fill-color .9s ease,text-shadow .9s ease;
+  will-change:color;
+}
+.hl.lit{
+  color:var(--amber);
+  -webkit-text-fill-color:#FF9500;
+  text-shadow:0 0 28px rgba(255,149,0,0.45),0 0 56px rgba(255,149,0,0.18);
+}
+@media(prefers-reduced-motion:reduce){
+  .hl{transition:none}
+}
+.section-body{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:20px;line-height:1.75;color:rgba(255,255,255,0.72);max-width:580px}
+
+/* ═══════════ ABOUT ═══════════ */
+.about{background:var(--dark);border-top:1px solid rgba(255,149,0,0.12)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+
+.about-visual{
+  position:relative;aspect-ratio:4/3;
+  background:var(--mid);overflow:hidden;
+  border:1px solid rgba(255,149,0,0.15);
+}
+.about-visual .av-glow{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 80% at 20% 50%,rgba(255,149,0,0.12) 0%,transparent 65%);
+}
+.about-visual .av-grid{
+  position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 58px,rgba(255,149,0,0.06) 58px,rgba(255,149,0,0.06) 59px),
+    repeating-linear-gradient(90deg,transparent,transparent 58px,rgba(255,149,0,0.06) 58px,rgba(255,149,0,0.06) 59px);
+}
+.av-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px}
+.av-num{font-family:'Bebas Neue',sans-serif;font-size:140px;
+  background:linear-gradient(135deg,#FFD000 0%,#FF9500 60%,#E8341A 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;
+  filter:drop-shadow(0 0 30px rgba(255,149,0,0.35));
+}
+.av-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:rgba(255,208,0,0.7);letter-spacing:0.12em}
+.av-tag{position:absolute;bottom:20px;left:20px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.38em;color:var(--amber);opacity:0.6;text-transform:uppercase}
+
+.about-text .section-body{max-width:100%;margin-bottom:40px}
+.about-pillars{border-top:1px solid rgba(255,149,0,0.12)}
+.pillar{display:flex;align-items:flex-start;gap:20px;padding:20px 0;border-bottom:1px solid rgba(255,149,0,0.08);transition:padding-left .2s}
+.pillar:hover{padding-left:6px}
+.pillar-num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--amber);opacity:0.5;flex-shrink:0;width:30px}
+.pillar-text{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:17px;line-height:1.65;color:rgba(255,255,255,0.78)}
+.pillar-text strong{color:var(--white);font-weight:600}
+
+/* ═══════════ NOMINATIONS ═══════════ */
+.nominations{
+  background:var(--deep);
+  border-top:1px solid rgba(255,149,0,0.12);
+  position:relative;overflow:hidden;
+}
+.nominations::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(255,149,0,0.04) 0%,transparent 65%);
+  pointer-events:none;
+}
+.nom-header{margin-bottom:56px}
+.nom-header-text{max-width:760px}
+.nom-header-text .section-body{margin-top:12px}
+.nom-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:rgba(255,149,0,0.1)}
+.nom-card{
+  background:var(--card);padding:36px 24px;
+  position:relative;overflow:hidden;cursor:default;
+  transition:background .3s,transform .2s;
+}
+.nom-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,149,0,0) 0%,rgba(255,149,0,0.07) 100%);
+  opacity:0;transition:opacity .3s;
+}
+.nom-card:hover{background:#181820;transform:translateY(-3px)}
+.nom-card:hover::after{opacity:1}
+.nom-card-top{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--amber),var(--amber2));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease;
+}
+.nom-card:hover .nom-card-top{transform:scaleX(1)}
+.nom-icon{
+  font-family:'Bebas Neue',sans-serif;font-size:64px;line-height:1;margin-bottom:18px;
+  background:linear-gradient(135deg,#FFD000 0%,#FF9500 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 16px rgba(255,149,0,0.3));
+}
+.nom-title{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.26em;color:var(--amber2);text-transform:uppercase;margin-bottom:12px}
+.nom-desc{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:16px;line-height:1.6;color:rgba(255,255,255,0.7)}
+
+/* ═══════════ PROGRAMME ═══════════ */
+.programme{
+  background:var(--dark);border-top:1px solid rgba(255,149,0,0.12);
+  position:relative;
+}
+.prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:64px}
+.prog-day-label{
+  font-family:'Bebas Neue',sans-serif;font-size:42px;
+  background:linear-gradient(135deg,#FFD000 0%,#FF9500 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid rgba(255,149,0,0.15);
+}
+.prog-event{display:flex;gap:24px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.05);transition:padding-left .2s,background .2s}
+.prog-event:hover{padding-left:10px;background:rgba(255,149,0,0.02)}
+.prog-time{font-family:'Space Mono',monospace;font-size:10px;color:var(--amber);flex-shrink:0;width:48px;opacity:0.75;padding-top:2px}
+.prog-name{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:17px;color:var(--white);line-height:1.3;margin-bottom:4px}
+.prog-detail{font-family:'Space Mono',monospace;font-size:7.5px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase}
+.prog-event.highlight .prog-name{
+  background:linear-gradient(90deg,#FFD000,#FF9500);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+/* ═══════════ SUBMIT CTA ═══════════ */
+.submit-section{
+  position:relative;overflow:hidden;
+  padding:140px 80px;
+  background:linear-gradient(135deg,#1a0800 0%,#0f0510 40%,#00081a 100%);
+  border-top:1px solid rgba(255,149,0,0.2);
+  text-align:center;
+}
+.submit-section::before{
+  content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:1100px;height:700px;
+  background:radial-gradient(ellipse,rgba(255,149,0,0.22) 0%,rgba(232,52,26,0.1) 35%,transparent 65%);
+  filter:blur(20px);pointer-events:none;
+}
+.submit-section::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--amber),var(--amber2),var(--amber),transparent);
+  opacity:0.5;
+}
+.submit-inner{position:relative;display:flex;flex-direction:column;align-items:center;gap:36px;max-width:760px;margin:0 auto}
+.submit-text{text-align:center}
+.submit-text .section-eyebrow{margin-bottom:18px}
+.submit-text .section-title{
+  background:linear-gradient(135deg,#fff 0%,#FFD000 60%,#FF9500 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:24px;
+}
+.submit-text .section-body{color:rgba(255,255,255,0.78);max-width:560px;margin:0 auto 8px}
+.submit-cta-wrap{position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:16px;margin-top:8px}
+.deadline-badge{
+  position:static;display:inline-flex;align-items:center;gap:8px;
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;
+  background:rgba(232,52,26,0.15);color:#FFB8A8;
+  border:1px solid rgba(232,52,26,0.5);
+  padding:8px 18px;
+}
+.deadline-badge::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 12px rgba(232,52,26,0.8);animation:beacon 1.6s ease-in-out infinite}
+.btn-big{
+  font-family:'Space Mono',monospace;font-size:13px;letter-spacing:0.32em;text-transform:uppercase;
+  color:var(--deep);font-weight:700;
+  background:linear-gradient(135deg,#FFD000 0%,#FF9500 100%);
+  padding:26px 64px;text-decoration:none;white-space:nowrap;
+  box-shadow:0 0 60px rgba(255,149,0,0.55),0 0 120px rgba(255,149,0,0.25),0 12px 32px rgba(0,0,0,0.4);
+  transition:transform .15s,box-shadow .2s;display:inline-block;
+  border:none;cursor:pointer;position:relative;
+  animation:ctaPulse 2.4s ease-in-out infinite;
+}
+@keyframes ctaPulse{
+  0%,100%{box-shadow:0 0 60px rgba(255,149,0,0.55),0 0 120px rgba(255,149,0,0.25),0 12px 32px rgba(0,0,0,0.4)}
+  50%{box-shadow:0 0 90px rgba(255,208,0,0.75),0 0 160px rgba(255,149,0,0.4),0 12px 32px rgba(0,0,0,0.4)}
+}
+.btn-big:hover{transform:translateY(-3px) scale(1.03);animation:none;box-shadow:0 0 100px rgba(255,208,0,0.85),0 0 180px rgba(255,149,0,0.45),0 16px 40px rgba(0,0,0,0.5)}
+.submit-fineprint{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.28em;
+  color:rgba(255,255,255,0.45);text-transform:uppercase;
+}
+
+/* ═══════════ PARTNERS ═══════════ */
+.partners{background:var(--deep);border-top:1px solid rgba(255,149,0,0.12)}
+.partner-logos{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin-top:52px;border:1px solid rgba(255,149,0,0.12)}
+.partner-item{
+  flex:1 1 180px;padding:40px 28px;
+  border-right:1px solid rgba(255,149,0,0.1);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  transition:background .25s;
+}
+.partner-item:hover{background:rgba(255,149,0,0.05)}
+.partner-item:last-child{border-right:none}
+.partner-abbr{
+  font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:0.1em;
+  background:linear-gradient(135deg,#FFD000,#FF9500);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 12px rgba(255,149,0,0.25));
+}
+.partner-name{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.65);text-transform:uppercase;text-align:center;line-height:1.55}
+
+/* ═══════════ NEWS ═══════════ */
+.news{background:var(--dark);border-top:1px solid rgba(255,149,0,0.12)}
+.news-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2px;background:rgba(255,149,0,0.08);margin-top:52px}
+.news-card{
+  background:var(--card);padding:36px 30px;
+  display:flex;flex-direction:column;gap:12px;cursor:pointer;
+  transition:background .2s;
+}
+.news-card:hover{background:#16161F}
+.news-card.featured{padding:48px 40px}
+.news-date{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.3em;color:var(--amber);opacity:0.8;text-transform:uppercase}
+.news-headline{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;color:var(--white);line-height:1.35}
+.news-card.featured .news-headline{font-size:30px}
+.news-excerpt{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:16px;line-height:1.65;color:rgba(255,255,255,0.7)}
+.news-arrow{
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.25em;text-transform:uppercase;
+  margin-top:auto;padding-top:12px;
+  background:linear-gradient(90deg,var(--amber),var(--amber2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+/* ═══════════ FOOTER ═══════════ */
+footer{
+  background:var(--deep);
+  border-top:1px solid rgba(255,149,0,0.2);
+  padding:60px 80px 40px;
+  position:relative;
+}
+footer::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,149,0,0.6),rgba(255,208,0,0.6),rgba(255,149,0,0.6),transparent);
+}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:60px;padding-bottom:48px;border-bottom:1px solid rgba(255,149,0,0.1);margin-bottom:32px}
+.footer-logo{display:flex;align-items:center;gap:14px}
+.footer-cols{display:flex;gap:60px}
+.footer-col h4{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.36em;color:var(--amber2);text-transform:uppercase;margin-bottom:18px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.footer-col ul li a{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:16px;color:rgba(255,255,255,0.78);text-decoration:none;transition:color .2s;cursor:pointer}
+.footer-col ul li a:hover{color:var(--amber2)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.footer-bottom p{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.2em;color:var(--muted)}
+.footer-bottom .tagline{
+  background:linear-gradient(90deg,var(--amber),var(--amber2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;letter-spacing:0.1em;
+}
+
+/* ═══════════ MODAL (lead form) ═══════════ */
+.modal-backdrop{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(5,5,10,0.85);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal-backdrop.open{display:flex;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{
+  position:relative;width:100%;max-width:480px;
+  background:var(--card);border:1px solid rgba(255,149,0,0.25);
+  padding:48px 40px;
+  box-shadow:0 0 80px rgba(255,149,0,0.25),0 20px 60px rgba(0,0,0,0.6);
+}
+.modal::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--amber),var(--amber2),var(--amber));
+}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  background:none;border:none;color:var(--muted);
+  font-family:'Space Mono',monospace;font-size:18px;cursor:pointer;
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+  transition:color .2s;
+}
+.modal-close:hover{color:var(--amber)}
+.modal h3{
+  font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:0.03em;
+  color:var(--white);margin-bottom:8px;line-height:1;
+}
+.modal .modal-sub{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.3em;
+  color:var(--amber);text-transform:uppercase;margin-bottom:28px;
+}
+.modal label{
+  display:block;
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:0.3em;
+  color:var(--muted);text-transform:uppercase;margin-bottom:8px;
+}
+.modal input[type=text],.modal input[type=tel]{
+  width:100%;
+  background:var(--mid);
+  border:1px solid rgba(255,149,0,0.15);
+  color:var(--white);
+  font-family:'Cormorant Garamond',serif;font-size:18px;
+  padding:14px 16px;margin-bottom:20px;
+  outline:none;transition:border-color .2s;
+}
+.modal input:focus{border-color:var(--amber)}
+.modal .consent{
+  display:flex;gap:10px;align-items:flex-start;
+  font-family:'Cormorant Garamond',serif;font-size:13px;line-height:1.5;
+  color:rgba(255,255,255,0.42);margin-bottom:24px;
+}
+.modal .consent input{margin-top:4px;accent-color:var(--amber)}
+.modal .consent a{color:var(--amber);text-decoration:underline}
+.modal .submit-row{display:flex;gap:12px;align-items:center}
+.modal button[type=submit]{width:100%;justify-content:center;text-align:center}
+.modal .hp{position:absolute;left:-9999px;opacity:0;pointer-events:none}
+.modal-status{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;margin-top:14px;min-height:14px;
+}
+.modal-status.ok{color:var(--amber2)}
+.modal-status.err{color:var(--red)}
+body.modal-open{overflow:hidden}
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr;gap:48px;padding:110px 40px 60px}
+  .hero-aside{max-width:520px}
+}
+@media(max-width:900px){
+  nav{padding:0 24px}
+  .nav-links{display:none}
+  section{padding:70px 24px}
+  .hero{padding:100px 24px 60px}
+  .about-grid,.prog-grid{grid-template-columns:1fr}
+  .nom-grid{grid-template-columns:1fr 1fr}
+  .hero-stats > .stat-item{padding:20px 22px}
+  .hero-stats > .stat-item:first-child{padding-top:32px}
+  .hero-stats > .stat-item:last-child{padding-bottom:32px}
+  .news-grid{grid-template-columns:1fr}
+  .submit-inner{flex-direction:column}
+  .footer-top{flex-direction:column}
+  .footer-cols{flex-wrap:wrap;gap:32px}
+  .hero-title{font-size:62px}
+  .submit-section{padding:70px 24px}
+  .band{padding:14px 24px}
+  footer{padding:48px 24px 32px}
+  .partner-logos{flex-direction:column}
+  .partner-item{border-right:none;border-bottom:1px solid rgba(255,149,0,0.1)}
+  .modal{padding:36px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-beacon"><div class="core"></div><div class="ring"></div></div>
+    <div class="nav-wordmark">
+      <span class="top">Дальневосточная</span>
+      <span class="bot">КИНОПРЕМИЯ</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">О премии</a></li>
+    <li><a href="#nominations">Номинации</a></li>
+    <li><a href="#programme">Программа</a></li>
+    <li><a href="#news">Новости</a></li>
+    <li><a href="#submit" class="nav-cta" data-lead-open>Подать заявку</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="layer-base"></div>
+    <div class="layer-grid"></div>
+    <div class="layer-ray"></div>
+    <div class="layer-ray2"></div>
+    <div class="layer-glow"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="h-dot"></div>
+      <span>Хабаровск · 2026 · III Церемония</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="outline">ДАЛЬНЕ</span><br>
+      <span class="outline">ВОСТОЧНАЯ</span><br>
+      <span class="accent">КИНО</span>ПРЕМИЯ
+    </h1>
+    <p class="hero-sub">Первый рассвет России. Первый кадр.</p>
+    <div class="hero-actions">
+      <a href="#submit" class="btn-primary" data-lead-open>Подать заявку →</a>
+      <a href="#programme" class="btn-ghost">Программа 2026</a>
+    </div>
+  </div>
+
+  <aside class="hero-aside">
+    <div class="hero-aside-tag">Приём заявок · до 1 авг 2026</div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num" data-count="40" data-suffix="+">40+</div><div class="stat-label">фильмов<br>в пуле</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="15">15</div><div class="stat-label">в конкурсной<br>программе</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="150" data-suffix="+">150+</div><div class="stat-label">участников<br>и гостей</div></div>
+    </div>
+    <div class="hero-aside-meta">
+      <span>III Сезон</span>
+      <strong>ДФО</strong>
+    </div>
+  </aside>
+
+  <div class="hero-scroll"><div class="scroll-line"></div></div>
+</section>
+
+<!-- BAND -->
+<div class="band">
+  <p>Приём заявок открыт · Дедлайн — 1 августа 2026</p>
+  <a href="#submit" data-lead-open>Подать заявку →</a>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="av-glow"></div>
+      <div class="av-grid"></div>
+      <div class="av-inner">
+        <div class="av-num">ДВК</div>
+        <div class="av-sub">Дальневосточная кинопремия</div>
+      </div>
+      <div class="av-tag">Хабаровск · 2026</div>
+    </div>
+    <div class="about-text">
+      <div class="section-eyebrow">О премии</div>
+      <h2 class="section-title">Кино,<br>рождённое<br>на <span class="hl">Востоке</span></h2>
+      <p class="section-body">Национальная профессиональная премия за высокие достижения в области кинематографии и вклад в развитие киноиндустрии Дальнего Востока России. Сборная точка для фильмов и авторов, создающих кино о регионе и в регионах ДФО.</p>
+      <div class="about-pillars">
+        <div class="pillar"><div class="pillar-num">01</div><div class="pillar-text"><strong>Отбор и поощрение</strong> лучших фильмов и сериалов о Дальнем Востоке</div></div>
+        <div class="pillar"><div class="pillar-num">02</div><div class="pillar-text"><strong>Диалог</strong> власти, бизнеса и киносообщества — пленарная сессия с губернатором</div></div>
+        <div class="pillar"><div class="pillar-num">03</div><div class="pillar-text"><strong>Локейшн-тур</strong> по Хабаровску и окрестностям для продюсеров и режиссёров</div></div>
+        <div class="pillar"><div class="pillar-num">04</div><div class="pillar-text"><strong>Образовательный трек</strong> совместно с Фондом кино и отраслевыми институтами</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOMINATIONS -->
+<section class="nominations" id="nominations">
+  <div class="nom-header">
+    <div class="nom-header-text">
+      <div class="section-eyebrow">Номинации 2026</div>
+      <h2 class="section-title">Категории</h2>
+      <p class="section-body">Пять основных номинаций, отражающих полный спектр кинематографического мастерства Дальнего Востока.</p>
+    </div>
+  </div>
+  <div class="nom-grid">
+    <div class="nom-card"><div class="nom-card-top"></div><div class="nom-icon">I</div><div class="nom-title">Лучший фильм</div><p class="nom-desc">Полнометражный фильм, снятый на территории ДФО или о Дальнем Востоке</p></div>
+    <div class="nom-card"><div class="nom-card-top"></div><div class="nom-icon">II</div><div class="nom-title">Лучший сериал</div><p class="nom-desc">Сериальный проект, связанный тематически или географически с ДФО</p></div>
+    <div class="nom-card"><div class="nom-card-top"></div><div class="nom-icon">III</div><div class="nom-title">Лучший режиссёр</div><p class="nom-desc">Режиссёрская работа, выдающаяся по художественному замыслу и исполнению</p></div>
+    <div class="nom-card"><div class="nom-card-top"></div><div class="nom-icon">IV</div><div class="nom-title">Лучший дебют</div><p class="nom-desc">Первый полнометражный фильм режиссёра, связанный с Дальним Востоком</p></div>
+    <div class="nom-card"><div class="nom-card-top"></div><div class="nom-icon">V</div><div class="nom-title">Специальный приз</div><p class="nom-desc">Вклад в развитие дальневосточной киноиндустрии — решение экспертного совета</p></div>
+  </div>
+</section>
+
+<!-- PROGRAMME -->
+<section class="programme" id="programme">
+  <div class="section-eyebrow">Деловая программа</div>
+  <h2 class="section-title">Хабаровск · 2026</h2>
+  <div class="prog-grid">
+    <div class="prog-day">
+      <div class="prog-day-label">День первый</div>
+      <div>
+        <div class="prog-event"><span class="prog-time">10:00</span><div><div class="prog-name">Пленарная сессия с губернатором Хабаровского края</div><div class="prog-detail">Роль кино в развитии региона · Федеральные спикеры</div></div></div>
+        <div class="prog-event"><span class="prog-time">13:00</span><div><div class="prog-name">Индустриальная сессия: бренд регионов ДФО</div><div class="prog-detail">Кино как инструмент продвижения территорий</div></div></div>
+        <div class="prog-event"><span class="prog-time">15:30</span><div><div class="prog-name">Семинары Фонда кино</div><div class="prog-detail">Питчинг · механизмы финансирования · работа с заявками</div></div></div>
+        <div class="prog-event"><span class="prog-time">18:00</span><div><div class="prog-name">Локейшн-тур по Хабаровску</div><div class="prog-detail">Для продюсеров и режиссёров · Презентация объектов</div></div></div>
+      </div>
+    </div>
+    <div class="prog-day">
+      <div class="prog-day-label">День второй</div>
+      <div>
+        <div class="prog-event"><span class="prog-time">11:00</span><div><div class="prog-name">Меры поддержки кинопроизводства в ДФО</div><div class="prog-detail">Институты развития · КРДВ</div></div></div>
+        <div class="prog-event"><span class="prog-time">14:00</span><div><div class="prog-name">Продвижение проектов ДФО</div><div class="prog-detail">Онлайн-платформы · федеральный прокат · фестивальная стратегия</div></div></div>
+        <div class="prog-event"><span class="prog-time">16:00</span><div><div class="prog-name">Показы конкурсной программы</div><div class="prog-detail">Открытые сеансы для участников и зрителей</div></div></div>
+        <div class="prog-event highlight"><span class="prog-time">19:30</span><div><div class="prog-name">Торжественная церемония награждения</div><div class="prog-detail">III Дальневосточная кинопремия · Хабаровск 2026</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBMIT -->
+<div class="submit-section" id="submit">
+  <div class="submit-inner">
+    <div class="submit-text">
+      <div class="section-eyebrow">Приём заявок</div>
+      <h2 class="section-title">Подайте <span class="hl">заявку</span></h2>
+      <p class="section-body">Принимаются полнометражные и короткометражные фильмы, сериалы — снятые на территории ДФО или о&nbsp;Дальнем Востоке.</p>
+    </div>
+    <div class="submit-cta-wrap">
+      <div class="deadline-badge">Дедлайн — 1 августа 2026</div>
+      <a href="#" class="btn-big" data-lead-open>Подать заявку →</a>
+      <div class="submit-fineprint">2 минуты · перезвоним сами</div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTNERS -->
+<section class="partners" id="partners">
+  <div class="section-eyebrow">Партнёры и учредители</div>
+  <h2 class="section-title">Вместе<br>делаем <span class="hl">кино</span></h2>
+  <div class="partner-logos">
+    <div class="partner-item"><div class="partner-abbr">МВР</div><div class="partner-name">Министерство развития Дальнего Востока и Арктики</div></div>
+    <div class="partner-item"><div class="partner-abbr">КРДВ</div><div class="partner-name">Корпорация развития Дальнего Востока и Арктики</div></div>
+    <div class="partner-item"><div class="partner-abbr">ФК</div><div class="partner-name">Фонд кино</div></div>
+    <div class="partner-item"><div class="partner-abbr">ХБК</div><div class="partner-name">Правительство Хабаровского края</div></div>
+    <div class="partner-item"><div class="partner-abbr">СР</div><div class="partner-name">ООО «Сердце Русского»</div></div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news" id="news">
+  <div class="section-eyebrow">Новости</div>
+  <h2 class="section-title">Актуальное</h2>
+  <div class="news-grid">
+    <div class="news-card featured">
+      <div class="news-date">Апрель 2026</div>
+      <div class="news-headline">III Дальневосточная кинопремия пройдёт в Хабаровске</div>
+      <p class="news-excerpt">В 2026 году премия впервые приходит в столицу Хабаровского края. Двухдневное индустриальное событие объединит деловую программу и торжественную церемонию награждения.</p>
+      <div class="news-arrow">Читать далее →</div>
+    </div>
+    <div class="news-card">
+      <div class="news-date">Март 2026</div>
+      <div class="news-headline">Открыт приём заявок на премию 2026</div>
+      <p class="news-excerpt">Принимаются фильмы и сериалы о Дальнем Востоке.</p>
+      <div class="news-arrow">Подробнее →</div>
+    </div>
+    <div class="news-card">
+      <div class="news-date">Январь 2026</div>
+      <div class="news-headline">Сформирован экспертный совет премии 2026</div>
+      <p class="news-excerpt">В состав вошли ведущие кинематографисты России.</p>
+      <div class="news-arrow">Подробнее →</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">
+      <div class="nav-beacon"><div class="core"></div><div class="ring"></div></div>
+      <div class="nav-wordmark">
+        <span class="top">Дальневосточная</span>
+        <span class="bot">КИНОПРЕМИЯ</span>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Премия</h4>
+        <ul>
+          <li><a href="#about">О премии</a></li>
+          <li><a href="#nominations">Номинации</a></li>
+          <li><a href="#">Экспертный совет</a></li>
+          <li><a href="#">История</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Участие</h4>
+        <ul>
+          <li><a href="#" data-lead-open>Подать заявку</a></li>
+          <li><a href="#">Регламент</a></li>
+          <li><a href="#programme">Программа</a></li>
+          <li><a href="#">Локейшн-тур</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Медиа</h4>
+        <ul>
+          <li><a href="#news">Новости</a></li>
+          <li><a href="#">Фотогалерея</a></li>
+          <li><a href="#">Пресс-служба</a></li>
+          <li><a href="#">Контакты</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Дальневосточная кинопремия · ООО «Сердце Русского»</p>
+    <span class="tagline">Первый рассвет России</span>
+  </div>
+</footer>
+
+<!-- LEAD MODAL -->
+<div class="modal-backdrop" id="leadModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+    <button class="modal-close" type="button" data-lead-close aria-label="Закрыть">✕</button>
+    <h3 id="leadTitle">Оставить заявку</h3>
+    <div class="modal-sub">Мы свяжемся с вами</div>
+    <form id="leadForm" novalidate>
+      <label for="lead-name">Имя</label>
+      <input type="text" id="lead-name" name="name" required minlength="2" maxlength="80" autocomplete="name">
+
+      <label for="lead-phone">Телефон</label>
+      <input type="tel" id="lead-phone" name="phone" required minlength="6" maxlength="32" autocomplete="tel" placeholder="+7 ___ ___-__-__">
+
+      <!-- honeypot anti-bot -->
+      <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off">
+
+      <label class="consent">
+        <input type="checkbox" name="consent" required>
+        <span>Согласен на обработку персональных данных согласно <a href="#" target="_blank" rel="noopener">политике конфиденциальности</a>.</span>
+      </label>
+
+      <button type="submit" class="btn-primary">Отправить →</button>
+      <div class="modal-status" id="leadStatus"></div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="/anim.js" defer></script>
+<script src="/app.js" defer></script>
+</body>
+</html>
