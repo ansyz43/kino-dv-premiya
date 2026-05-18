@@ -788,8 +788,9 @@ body{font-size:21px}
 .modal .consent{font-size:19px;line-height:1.55}
 .footer-bottom p{font-size:16px;letter-spacing:0.1em}
 .footer-bottom .tagline{font-size:24px}
-.press-card h3{font-size:33px}
-.press-card p{font-size:22px}
+.press-card h3{font-size:38px;line-height:1.22}
+.press-card p{font-size:27px;line-height:1.5}
+.press-card .news-date{font-size:18px;letter-spacing:0.18em}
 .prose-block p,.contact-tile p,.submit-option p{font-size:25px}
 .hero-title .outline{-webkit-text-stroke:2px rgba(255,255,255,0.34);text-shadow:0 0 22px rgba(255,149,0,0.18)}
 .policy-document{max-width:1120px}

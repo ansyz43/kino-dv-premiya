@@ -81,14 +81,25 @@ sudo install -d -m 750 -o kino -g kino /etc/kino
 sudo -u kino tee /etc/kino/env >/dev/null <<'EOF'
 PORT=3000
 HOST=127.0.0.1
-# Опционально — заявки в Telegram:
+
+# SMTP — отправка заявок на почту (через smtp.beget.com)
+SMTP_HOST=smtp.beget.com
+SMTP_PORT=465
+SMTP_SECURE=ssl
+SMTP_USER=noreply@kinodvk.ru
+SMTP_PASS=ПАРОЛЬ_ОТ_ЯЩИКА
+MAIL_FROM=noreply@kinodvk.ru
+MAIL_TO=kisuke43@gmail.com
+
+# (опционально) дубликат заявок в Telegram
 TELEGRAM_BOT_TOKEN=
 TELEGRAM_CHAT_ID=
 EOF
 sudo chmod 640 /etc/kino/env
 ```
 
-Сейчас Node-бэкенд шлёт заявки в Telegram. Если не нужен Telegram, оставьте переменные пустыми — на форме отвалится `/api/lead`, и фронт автоматически пойдёт по `/mail.php` (если он есть). Если хотите чтобы и на VPS работала email-отправка — поднимите `php-fpm` (см. п. 7).
+Сначала создайте на Beget ящик `noreply@<домен>` и впишите его пароль в `SMTP_PASS`.
+Если SMTP не задан и Telegram тоже — сервер примет заявку и запишет её в логи, но никуда не отправит.
 
 ---
 
