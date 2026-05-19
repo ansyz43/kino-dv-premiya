@@ -1,96 +1,127 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import MasterclassesAccordion from "../components/ui/masterclasses-accordion";
-import ProgramTimeline from "../components/ui/program-timeline";
-
-const schedule = [
-  {
-    date: "24.09",
-    weekday: "Среда",
-    events: [
-      { time: "10:00", title: "Открытие деловой программы", detail: "Регистрация участников, кофе-приём" },
-      { time: "12:00", title: "Питчинги дальневосточных проектов", detail: "Презентации режиссёров и продюсеров — 6&nbsp;слотов по&nbsp;15&nbsp;минут" },
-      { time: "16:00", title: "Круглый стол: индустрия Дальнего Востока", detail: "Дискуссия с&nbsp;участием Минвостокразвития и&nbsp;Фонда кино" },
-    ],
-  },
-  {
-    date: "25.09",
-    weekday: "Четверг",
-    events: [
-      { time: "11:00", title: "Мастер-классы", detail: "Параллельные программы для&nbsp;режиссёров, операторов и&nbsp;сценаристов" },
-      { time: "15:00", title: "Локейшен-тур по&nbsp;Хабаровску", detail: "Городские площадки и&nbsp;окрестности — для&nbsp;операторов и&nbsp;продюсеров" },
-      { time: "19:00", title: "III церемония Дальневосточной Кинопремии", detail: "Городской дворец культуры · вручение наград" },
-    ],
-  },
-  {
-    date: "26.09",
-    weekday: "Пятница",
-    events: [
-      { time: "12:00", title: "Кино-завтрак с&nbsp;лауреатами", detail: "Закрытая встреча с&nbsp;победителями сезона" },
-      { time: "14:00", title: "Закрытие программы", detail: "Подведение итогов, объявление дат 2027 года" },
-    ],
-  },
-];
-
-const masterclasses = [
-  { num: "01", title: "Режиссура авторского кино",     meta: "120&nbsp;мин · 50&nbsp;мест", body: "Подходы к работе со&nbsp;сценарием, актёрами и&nbsp;камерой. Кейсы региональных проектов, выходивших в&nbsp;прокат и&nbsp;на&nbsp;стримингах." },
-  { num: "02", title: "Операторская работа: Дальний Восток как декорация", meta: "120&nbsp;мин · 40&nbsp;мест", body: "Свет, погода, логистика, работа с&nbsp;натурой региона. Разбор фильмов, снятых в&nbsp;Приморье, на&nbsp;Сахалине и&nbsp;в&nbsp;Якутии." },
-  { num: "03", title: "Сценарий и&nbsp;драматургия",   meta: "90&nbsp;мин · 60&nbsp;мест",  body: "От&nbsp;идеи до&nbsp;поэпизодного плана. Региональные мотивы и&nbsp;универсальные истории. Практикум по&nbsp;питчингу." },
-  { num: "04", title: "Постпродакшн и&nbsp;цветокоррекция", meta: "90&nbsp;мин · 30&nbsp;мест",  body: "Работа с&nbsp;референсами, базовые LUT-схемы, рабочий процесс с&nbsp;колористом-удалёнщиком." },
-];
 ---
 <Layout title={`Программа · Дальневосточная Кинопремия 2026`} active={"program"}>
 
 <section class="page-hero v2">
   <div class="page-hero-eyebrow"><span class="dot"></span><span>Деловая программа</span></div>
-  <h1 class="page-hero-title" data-text-reveal>Хабаровск <em>24-26 сентября</em></h1>
-  <p class="page-hero-lead">Три дня деловой и&nbsp;образовательной программы перед III церемонией Дальневосточной Кинопремии. Площадка — Городской дворец культуры.</p>
+  <h1 class="page-hero-title" data-text-reveal>Хабаровск <em>24–26 сентября</em></h1>
+  <p class="page-hero-lead">Три дня деловой и&nbsp;образовательной программы перед III&nbsp;церемонией Дальневосточной Кинопремии. Площадка — Городской дворец культуры.</p>
 </section>
 
-<!-- Vertical timeline — компонент из 21st-dev (Modern Timeline, framer-motion) -->
-<section class="schedule reveal" style="padding:64px 24px;max-width:1280px;margin:0 auto;">
-  <header class="schedule-head">
-    <h2>Расписание</h2>
-    <p>Точное время и&nbsp;спикеры будут опубликованы ближе к&nbsp;сентябрю</p>
-  </header>
-  <ProgramTimeline client:visible />
+<!-- День 1 -->
+<section class="program-day reveal">
+  <div class="program-day-mark">
+    <div class="program-day-date">24.09</div>
+    <div class="program-day-label">День 1 · Среда</div>
+    <div class="program-day-spine"></div>
+  </div>
+  <div class="bento-6 offset with-lines">
+    <article class="b6-card dark w4 feature">
+      <span class="b6-card-corner">10:00 · Открытие</span>
+      <div class="b6-card-num">01</div>
+      <h3 class="b6-card-title">Открытие деловой программы</h3>
+      <p class="b6-card-body">Регистрация участников, кофе-приём, знакомство гостей с&nbsp;площадкой Городского дворца культуры.</p>
+    </article>
+    <article class="b6-card gold w2">
+      <span class="b6-card-corner">12:00</span>
+      <div class="b6-card-num">02</div>
+      <h3 class="b6-card-title">Питчинги ДВ-проектов</h3>
+      <p class="b6-card-body">6&nbsp;слотов по&nbsp;15&nbsp;мин.</p>
+    </article>
+    <article class="b6-card w6">
+      <span class="b6-card-corner">16:00 · Круглый стол</span>
+      <div class="b6-card-num">03</div>
+      <h3 class="b6-card-title">Индустрия Дальнего Востока</h3>
+      <p class="b6-card-body">Дискуссия с&nbsp;Минвостокразвития, Фондом кино, продюсерами и&nbsp;операторами региональных проектов. Открытая часть для&nbsp;гостей премии.</p>
+    </article>
+  </div>
 </section>
 
-<!-- Старая самописная сетка скрыта -->
-<section style="display:none">
-  {schedule.map((day) => (
-    <div class="schedule-day">
-      <div class="schedule-day-mark">
-        <div class="schedule-day-date">{day.date}</div>
-        <div class="schedule-day-weekday">{day.weekday}</div>
-      </div>
-    </div>
-  ))}
+<!-- День 2 — церемония -->
+<section class="program-day reveal">
+  <div class="program-day-mark">
+    <div class="program-day-date">25.09</div>
+    <div class="program-day-label">День 2 · Четверг · Церемония</div>
+    <div class="program-day-spine"></div>
+  </div>
+  <div class="bento-6 offset with-lines">
+    <article class="b6-card w3">
+      <span class="b6-card-corner">11:00 · Параллельно</span>
+      <div class="b6-card-num">04</div>
+      <h3 class="b6-card-title">Мастер-классы</h3>
+      <p class="b6-card-body">Для режиссёров, операторов, сценаристов. Подробности — ниже.</p>
+    </article>
+    <article class="b6-card gold w3">
+      <span class="b6-card-corner">15:00 · Локейшен-тур</span>
+      <div class="b6-card-num">05</div>
+      <h3 class="b6-card-title">Хабаровск и&nbsp;окрестности</h3>
+      <p class="b6-card-body">Городские площадки и&nbsp;натура — для&nbsp;операторов и&nbsp;продюсеров будущих проектов.</p>
+    </article>
+    <article class="b6-card dark w6 feature">
+      <span class="b6-card-corner">19:00 · ЦЕРЕМОНИЯ</span>
+      <div class="b6-card-num">06</div>
+      <h3 class="b6-card-title">III церемония Дальневосточной Кинопремии</h3>
+      <p class="b6-card-body">Городской дворец культуры, Хабаровск. Торжественное вручение наград сезона 2026. Финал трёхдневной программы.</p>
+    </article>
+  </div>
 </section>
 
-<!-- Accordion: master-classes -->
-<section id="mc" class="masterclasses reveal">
-  <header class="mc-head">
+<!-- День 3 -->
+<section class="program-day reveal">
+  <div class="program-day-mark">
+    <div class="program-day-date">26.09</div>
+    <div class="program-day-label">День 3 · Пятница</div>
+    <div class="program-day-spine"></div>
+  </div>
+  <div class="bento-6 offset">
+    <article class="b6-card gold w3">
+      <span class="b6-card-corner">12:00 · Закрытое</span>
+      <div class="b6-card-num">07</div>
+      <h3 class="b6-card-title">Кино-завтрак с&nbsp;лауреатами</h3>
+      <p class="b6-card-body">Закрытая встреча с&nbsp;победителями сезона. Обсуждение планов следующего года.</p>
+    </article>
+    <article class="b6-card w3">
+      <span class="b6-card-corner">14:00 · Закрытие</span>
+      <div class="b6-card-num">08</div>
+      <h3 class="b6-card-title">Подведение итогов</h3>
+      <p class="b6-card-body">Объявление дат и&nbsp;места проведения IV&nbsp;сезона в&nbsp;2027 году.</p>
+    </article>
+  </div>
+</section>
+
+<!-- Мастер-классы (отдельная секция в нашем стиле) -->
+<section id="mc" class="masterclasses-v2 reveal">
+  <div class="mc-head">
     <div class="page-hero-eyebrow"><span class="dot"></span><span>Мастер-классы</span></div>
-    <h2 data-text-reveal>Программа практик</h2>
-    <p>Открытые встречи с&nbsp;профессионалами индустрии. Регистрация откроется в&nbsp;июле 2026 года.</p>
-  </header>
-
-  <MasterclassesAccordion client:visible />
-  <div style="display:none">
-    {masterclasses.map((m) => (
-      <article class="acc-item" data-acc>
-        <button type="button" class="acc-header" data-acc-toggle aria-expanded="false">
-          <span class="acc-num">{m.num}</span>
-          <span class="acc-title" set:html={m.title}></span>
-          <span class="acc-meta" set:html={m.meta}></span>
-          <span class="acc-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="acc-body" hidden>
-          <p set:html={m.body}></p>
-        </div>
-      </article>
-    ))}
+    <h2 class="mc-title">Программа <em>практик</em></h2>
+    <p class="mc-lead">Открытые встречи с&nbsp;профессионалами индустрии. Параллельные потоки 25&nbsp;сентября. Регистрация откроется в&nbsp;июле 2026 года.</p>
+  </div>
+  <div class="bento-6 offset with-lines">
+    <article class="b6-card dark w4 feature">
+      <span class="b6-card-corner">120 мин · 50 мест</span>
+      <div class="b6-card-num">01</div>
+      <h3 class="b6-card-title">Режиссура авторского кино</h3>
+      <p class="b6-card-body">Подходы к&nbsp;работе со&nbsp;сценарием, актёрами и&nbsp;камерой. Кейсы региональных проектов, выходивших в&nbsp;прокат и&nbsp;на&nbsp;стримингах.</p>
+    </article>
+    <article class="b6-card gold w2">
+      <span class="b6-card-corner">120 · 40 мест</span>
+      <div class="b6-card-num">02</div>
+      <h3 class="b6-card-title">Операторская работа</h3>
+      <p class="b6-card-body">ДВ как декорация.</p>
+    </article>
+    <article class="b6-card w3">
+      <span class="b6-card-corner">90 мин · 60 мест</span>
+      <div class="b6-card-num">03</div>
+      <h3 class="b6-card-title">Сценарий и&nbsp;драматургия</h3>
+      <p class="b6-card-body">От&nbsp;идеи до&nbsp;поэпизодного плана. Региональные мотивы и&nbsp;универсальные истории. Практикум по&nbsp;питчингу.</p>
+    </article>
+    <article class="b6-card gold w3">
+      <span class="b6-card-corner">90 мин · 30 мест</span>
+      <div class="b6-card-num">04</div>
+      <h3 class="b6-card-title">Постпродакшн</h3>
+      <p class="b6-card-body">Работа с&nbsp;референсами, LUT-схемы, рабочий процесс с&nbsp;колористом-удалёнщиком.</p>
+    </article>
   </div>
 </section>
 

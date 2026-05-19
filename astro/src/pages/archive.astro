@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ArchiveBento from "../components/ui/archive-bento";
+import PhotoMarquee from "../components/PhotoMarquee.tsx";
 
 type Film = { cat: string; title: string; meta: string; region?: string; winner?: boolean; big?: boolean; img?: string };
 
@@ -86,5 +87,15 @@ const years: Year[] = [
     ))}
   </div>
 </div>
+
+<!-- Отдельная секция: фотогалерея с предыдущих церемоний -->
+<section class="archive-photos reveal">
+  <header class="archive-photos-head">
+    <div class="page-hero-eyebrow"><span class="dot"></span><span>Фотоархив</span></div>
+    <h2>Фотографии <em>предыдущих</em> церемоний</h2>
+    <p>Кадры I и II сезонов: деловая программа, площадки, церемония вручения.</p>
+  </header>
+  <PhotoMarquee client:visible />
+</section>
 
 </Layout>

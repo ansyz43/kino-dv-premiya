@@ -2761,9 +2761,117 @@ footer.split { padding: 0; background: var(--bg); color: var(--text); border-top
   .bento-6 { padding: 24px 24px 64px; gap: 12px; grid-template-columns: 1fr; }
   .b6-card,
   .b6-card.w2, .b6-card.w3, .b6-card.w4, .b6-card.w6 { grid-column: span 1; min-height: auto; }
-  .b6-card { padding: 24px 20px; }
+  .b6-card { padding: 24px 20px; transform: none !important; }
   .b6-card-num { font-size: 56px !important; }
   .b6-card-title { font-size: 21px !important; }
+  .bento-6.offset .b6-card { transform: none !important; }
+}
+
+/* Offset вариант — карточки чередуются вверх/вниз для асимметрии */
+.bento-6.offset { padding-top: 60px; }
+.bento-6.offset .b6-card:nth-child(2) { transform: translateY(-32px); }
+.bento-6.offset .b6-card:nth-child(3) { transform: translateY(24px); }
+.bento-6.offset .b6-card:nth-child(4) { transform: translateY(-16px); }
+.bento-6.offset .b6-card:nth-child(5) { transform: translateY(36px); }
+.bento-6.offset .b6-card:nth-child(6) { transform: translateY(-24px); }
+.bento-6.offset .b6-card:nth-child(7) { transform: translateY(20px); }
+/* Hover оверайдит translateY со своим lift -4 */
+.bento-6.offset .b6-card:nth-child(2):hover { transform: translateY(-36px); }
+.bento-6.offset .b6-card:nth-child(3):hover { transform: translateY(20px); }
+.bento-6.offset .b6-card:nth-child(4):hover { transform: translateY(-20px); }
+.bento-6.offset .b6-card:nth-child(5):hover { transform: translateY(32px); }
+.bento-6.offset .b6-card:nth-child(6):hover { transform: translateY(-28px); }
+.bento-6.offset .b6-card:nth-child(7):hover { transform: translateY(16px); }
+
+/* Program day — большая дата + spine line + bento ниже */
+.program-day { padding: 32px 0 0; position: relative; }
+.program-day-mark {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 64px 32px;
+  display: grid; grid-template-columns: auto auto 1fr; gap: 24px; align-items: end;
+}
+.program-day-date {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(56px, 7vw, 96px); line-height: 0.9;
+  color: var(--brand-primary); letter-spacing: -0.025em;
+}
+.program-day-label {
+  font-family: var(--font-sans); font-size: 13px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--brand-gold); font-weight: 700;
+  padding-bottom: 12px;
+}
+.program-day-spine {
+  height: 1px; background: var(--brand-gold); opacity: 0.5;
+  margin-bottom: 14px;
+}
+
+.masterclasses-v2 { padding: 64px 0 96px; background: var(--bg-warm); border-top: 1px solid var(--border); margin-top: 48px; }
+.mc-head {
+  max-width: 1280px; margin: 0 auto 32px; padding: 0 64px;
+}
+.mc-title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(40px, 5vw, 72px); line-height: 0.98;
+  letter-spacing: -0.015em; color: var(--brand-primary);
+  margin: 12px 0 12px;
+}
+.mc-title em {
+  font-family: var(--font-serif); font-style: italic; font-weight: 400;
+  color: var(--brand-gold); -webkit-text-fill-color: var(--brand-gold);
+}
+.mc-lead {
+  font-family: var(--font-sans); font-size: 17px; line-height: 1.6;
+  color: var(--text-mid); margin: 0; max-width: 60ch;
+}
+@media (max-width: 900px) {
+  .program-day-mark { grid-template-columns: 1fr; padding: 0 24px 24px; gap: 8px; }
+  .program-day-spine { display: none; }
+  .masterclasses-v2 { padding: 40px 0 64px; }
+  .mc-head { padding: 0 24px; }
+}
+
+/* Archive photos — отдельная секция с галереей под bento победителей */
+.archive-photos {
+  background: var(--bg-warm);
+  border-top: 1px solid var(--border);
+  padding: 80px 0 40px;
+  margin-top: 48px;
+}
+.archive-photos-head {
+  max-width: 1280px; margin: 0 auto 24px; padding: 0 64px;
+}
+.archive-photos-head h2 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(36px, 5vw, 64px); line-height: 1;
+  letter-spacing: -0.01em; color: var(--brand-primary);
+  margin: 12px 0 12px;
+}
+.archive-photos-head h2 em {
+  font-family: var(--font-serif); font-style: italic; font-weight: 400;
+  color: var(--brand-gold); -webkit-text-fill-color: var(--brand-gold);
+}
+.archive-photos-head p {
+  font-family: var(--font-sans); font-size: 17px; color: var(--text-mid); margin: 0;
+}
+.archive-photos .photo-marquee-section { background: transparent; border: none; padding-top: 16px; padding-bottom: 32px; }
+.archive-photos .photo-marquee-head { display: none; }  /* свой заголовок уже выше */
+@media (max-width: 900px) {
+  .archive-photos { padding: 56px 0 32px; }
+  .archive-photos-head { padding: 0 24px; }
+}
+
+/* Декоративные линии на странице с bento */
+.bento-6.with-lines { position: relative; }
+.bento-6.with-lines::before {
+  content: ''; position: absolute;
+  top: 40px; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 80px; background: var(--brand-gold); opacity: 0.5;
+}
+.bento-6.with-lines::after {
+  content: ''; position: absolute;
+  bottom: 60px; left: 64px; right: 64px; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--brand-gold) 30%, var(--brand-gold) 70%, transparent 100%);
+  opacity: 0.4;
 }
 
 /* ════════ Subscribe panel — gold overlay (как Discover, упирается сверху в footer) ════════ */
