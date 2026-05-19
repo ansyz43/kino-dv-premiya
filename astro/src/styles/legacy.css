@@ -95,9 +95,31 @@ nav.nav-hidden, .site-nav.nav-hidden { transform: translateY(-110%); }
 body { padding-top: 84px; }
 @media(max-width:900px){ body { padding-top: 72px; } }
 .nav-logo { display: flex; align-items: center; gap: 14px; min-width: 0; }
-.nav-logo-mark { height: 56px; width: auto; max-width: 220px; object-fit: contain; flex: 0 0 auto; display: block; }
+.nav-logo-mark { height: 72px; width: auto; max-width: 280px; object-fit: contain; flex: 0 0 auto; display: block; }
 .nav-wordmark { display: none; }  /* лого теперь со встроенной надписью */
-.footer-logo-img { height: 96px; width: auto; object-fit: contain; display: block; opacity: 0.95; }
+.footer-logo-img { height: 140px; width: auto; object-fit: contain; display: block; opacity: 1; }
+
+/* Большой лого на главной — лаконичный mark между hero и stats */
+.logo-feature {
+  display: flex; justify-content: center; align-items: center;
+  padding: 56px 24px 24px;
+  background: var(--bg);
+}
+.logo-feature-img {
+  height: 220px; width: auto; object-fit: contain;
+  display: block;
+  opacity: 0.95;
+  transition: opacity .4s ease, transform .5s cubic-bezier(.2,.7,.2,1);
+}
+.logo-feature-img:hover { opacity: 1; transform: scale(1.03); }
+@media (max-width: 900px) {
+  .logo-feature { padding: 40px 24px 16px; }
+  .logo-feature-img { height: 160px; }
+}
+@media (max-width: 900px) {
+  .nav-logo-mark { height: 56px; }
+  .footer-logo-img { height: 96px; }
+}
 .nav-wordmark { display: flex; flex-direction: column; line-height: 1; }
 .nav-wordmark .top {
   font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.22em;
