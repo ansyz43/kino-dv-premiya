@@ -164,25 +164,51 @@
   });
 })();
 
-// Text Reveal by word — большие заголовки .hero-title и [data-text-reveal] появляются пословно
+// Text Reveal by word — DOM-walker (не ломает вложенные <span>, <em>, <br>)
 (function () {
   const targets = document.querySelectorAll('.hero-title, [data-text-reveal]');
   targets.forEach((el) => {
     if (el.dataset.split === '1') return;
     el.dataset.split = '1';
-    const html = el.innerHTML;
-    // Разбиваем по словам, сохраняя <br>, <span>, <em> структуру.
-    const wrap = (txt) => txt.replace(/(\S+)/g, '<span class="word"><span class="word-i">$1</span></span>');
-    el.innerHTML = html.split('<br>').map(wrap).join('<br>');
-    // Запускаем анимацию: либо сразу (hero), либо на scroll-into-view
-    const isHero = el.classList.contains('hero-title');
+
+    // Рекурсивно ходим по текстовым нодам и оборачиваем каждое слово в <span class="word">
+    const walk = (node) => {
+      const children = Array.from(node.childNodes);
+      children.forEach((child) => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const text = child.nodeValue;
+          if (!text || !text.trim()) return;
+          const frag = document.createDocumentFragment();
+          const parts = text.split(/(\s+)/);
+          parts.forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) {
+              frag.appendChild(document.createTextNode(part));
+            } else {
+              const word = document.createElement('span');
+              word.className = 'word';
+              const inner = document.createElement('span');
+              inner.className = 'word-i';
+              inner.textContent = part;
+              word.appendChild(inner);
+              frag.appendChild(word);
+            }
+          });
+          child.parentNode.replaceChild(frag, child);
+        } else if (child.nodeType === Node.ELEMENT_NODE && child.tagName !== 'BR') {
+          walk(child);
+        }
+      });
+    };
+    walk(el);
+
     const fire = () => {
       el.querySelectorAll('.word').forEach((w, i) => {
         w.style.transitionDelay = (i * 70) + 'ms';
         requestAnimationFrame(() => w.classList.add('in'));
       });
     };
-    if (isHero) {
+    if (el.classList.contains('hero-title')) {
       setTimeout(fire, 150);
     } else {
       const io = new IntersectionObserver((entries) => {
@@ -193,25 +219,7 @@
   });
 })();
 
-// Cursor trail — за курсором тянется лёгкий шлейф золотых точек
-(function () {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.matchMedia('(hover: none)').matches) return; // не на touch-устройствах
-  let last = 0;
-  const RATE = 28; // ms между точками
-  document.addEventListener('mousemove', (e) => {
-    const now = performance.now();
-    if (now - last < RATE) return;
-    last = now;
-    const d = document.createElement('div');
-    d.className = 'cursor-dust';
-    d.style.left = e.clientX + 'px';
-    d.style.top  = e.clientY + 'px';
-    document.body.appendChild(d);
-    requestAnimationFrame(() => d.classList.add('fade'));
-    setTimeout(() => d.remove(), 700);
-  }, { passive: true });
-})();
+// Cursor trail — отключено по запросу
 
 // Reveal-on-scroll — IntersectionObserver: blur-up + stagger
 (function () {

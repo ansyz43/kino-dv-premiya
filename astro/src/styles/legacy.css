@@ -1500,12 +1500,18 @@ footer.split { padding: 0; background: var(--bg); color: var(--text); border-top
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 14px 4px; color: var(--brand-primary);
   font-family: var(--font-sans); font-size: 16px; font-weight: 500;
-  transition: padding .2s, color .2s;
+  transition: padding .25s cubic-bezier(.2,.7,.2,1),
+              color .35s cubic-bezier(.2,.7,.2,1);
 }
-.discover ul li a:hover { padding-left: 12px; color: var(--text-mid); }
+/* При hover текст и стрелка плавно белеют */
+.discover ul li a:hover { padding-left: 12px; color: #ffffff; }
 .discover ul li a::after {
   content: '↗'; font-family: var(--font-sans); font-size: 16px;
   color: var(--brand-primary); opacity: 0.7;
+  transition: color .35s cubic-bezier(.2,.7,.2,1), opacity .35s, transform .35s;
+}
+.discover ul li a:hover::after {
+  color: #ffffff; opacity: 1; transform: translateX(2px);
 }
 .feat-news.has-discover { padding-bottom: 200px; }
 
