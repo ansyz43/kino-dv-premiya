@@ -1,18 +1,35 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const partners = [
+  { abbr: "МВР",  name: "Министерство Российской Федерации по&nbsp;развитию Дальнего Востока и&nbsp;Арктики", role: "Учредитель" },
+  { abbr: "КРДВ", name: "Корпорация развития Дальнего Востока и&nbsp;Арктики", role: "Учредитель" },
+  { abbr: "ФК",   name: "Фонд кино", role: "Партнёр" },
+  { abbr: "ФРСИ", name: "Фонд развития социальных инициатив", role: "Партнёр" },
+  { abbr: "СР",   name: "ООО «Сердце Русского»", role: "Оператор" },
+  { abbr: "МК",   name: "Министерство культуры Российской Федерации", role: "При поддержке" },
+  { abbr: "ДФО",  name: "Дальневосточный федеральный округ", role: "Регион" },
+];
 ---
 <Layout title={`Партнёры · Дальневосточная Кинопремия 2026`} active={"partners"}>
 
-<section class="partners" id="partners">
-  <div class="section-eyebrow">Партнёры и учредители</div>
-  <h2 class="section-title">Вместе<br>делаем <span class="hl">кино</span></h2>
-  <div class="partner-logos">
-    <div class="partner-item"><div class="partner-abbr">МВР</div><div class="partner-name">Министерство развития Дальнего Востока и Арктики</div></div>
-    <div class="partner-item"><div class="partner-abbr">КРДВ</div><div class="partner-name">Корпорация развития Дальнего Востока и Арктики</div></div>
-    <div class="partner-item"><div class="partner-abbr">ФК</div><div class="partner-name">Фонд кино</div></div>
-    <div class="partner-item"><div class="partner-abbr">ФРСИ</div><div class="partner-name">Фонд развития социальных инициатив</div></div>
-    <div class="partner-item"><div class="partner-abbr">СР</div><div class="partner-name">ООО «Сердце Русского»</div></div>
-  </div>
+<section class="page-hero v2">
+  <div class="page-hero-eyebrow"><span class="dot"></span><span>Партнёры и учредители</span></div>
+  <h1 class="page-hero-title" data-text-reveal>Вместе <em>делаем</em> кино</h1>
+  <p class="page-hero-lead">Премия существует благодаря государственным институтам, фондам и&nbsp;индустриальным партнёрам, поддерживающим кинематограф Дальнего Востока.</p>
+</section>
+
+<section class="partners-list reveal-stagger">
+  {partners.map((p, i) => (
+    <article class="partner-row">
+      <div class="partner-row-abbr">{p.abbr}</div>
+      <div class="partner-row-body">
+        <h3 class="partner-row-name" set:html={p.name}></h3>
+        <div class="partner-row-meta">{String(i + 1).padStart(2, "0")} · {p.role}</div>
+      </div>
+      <div class="partner-row-tag">{p.role}</div>
+    </article>
+  ))}
 </section>
 
 </Layout>

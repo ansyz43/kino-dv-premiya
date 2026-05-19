@@ -1,33 +1,100 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const schedule = [
+  {
+    date: "24.09",
+    weekday: "Среда",
+    events: [
+      { time: "10:00", title: "Открытие деловой программы", detail: "Регистрация участников, кофе-приём" },
+      { time: "12:00", title: "Питчинги дальневосточных проектов", detail: "Презентации режиссёров и продюсеров — 6&nbsp;слотов по&nbsp;15&nbsp;минут" },
+      { time: "16:00", title: "Круглый стол: индустрия Дальнего Востока", detail: "Дискуссия с&nbsp;участием Минвостокразвития и&nbsp;Фонда кино" },
+    ],
+  },
+  {
+    date: "25.09",
+    weekday: "Четверг",
+    events: [
+      { time: "11:00", title: "Мастер-классы", detail: "Параллельные программы для&nbsp;режиссёров, операторов и&nbsp;сценаристов" },
+      { time: "15:00", title: "Локейшен-тур по&nbsp;Хабаровску", detail: "Городские площадки и&nbsp;окрестности — для&nbsp;операторов и&nbsp;продюсеров" },
+      { time: "19:00", title: "III церемония Дальневосточной Кинопремии", detail: "Городской дворец культуры · вручение наград" },
+    ],
+  },
+  {
+    date: "26.09",
+    weekday: "Пятница",
+    events: [
+      { time: "12:00", title: "Кино-завтрак с&nbsp;лауреатами", detail: "Закрытая встреча с&nbsp;победителями сезона" },
+      { time: "14:00", title: "Закрытие программы", detail: "Подведение итогов, объявление дат 2027 года" },
+    ],
+  },
+];
+
+const masterclasses = [
+  { num: "01", title: "Режиссура авторского кино",     meta: "120&nbsp;мин · 50&nbsp;мест", body: "Подходы к работе со&nbsp;сценарием, актёрами и&nbsp;камерой. Кейсы региональных проектов, выходивших в&nbsp;прокат и&nbsp;на&nbsp;стримингах." },
+  { num: "02", title: "Операторская работа: Дальний Восток как декорация", meta: "120&nbsp;мин · 40&nbsp;мест", body: "Свет, погода, логистика, работа с&nbsp;натурой региона. Разбор фильмов, снятых в&nbsp;Приморье, на&nbsp;Сахалине и&nbsp;в&nbsp;Якутии." },
+  { num: "03", title: "Сценарий и&nbsp;драматургия",   meta: "90&nbsp;мин · 60&nbsp;мест",  body: "От&nbsp;идеи до&nbsp;поэпизодного плана. Региональные мотивы и&nbsp;универсальные истории. Практикум по&nbsp;питчингу." },
+  { num: "04", title: "Постпродакшн и&nbsp;цветокоррекция", meta: "90&nbsp;мин · 30&nbsp;мест",  body: "Работа с&nbsp;референсами, базовые LUT-схемы, рабочий процесс с&nbsp;колористом-удалёнщиком." },
+];
 ---
 <Layout title={`Программа · Дальневосточная Кинопремия 2026`} active={"program"}>
 
-<section class="page-hero">
-  
-  <div class="section-headline">
-    <div class="section-eyebrow">Деловая программа</div>
-    <h2 class="section-title">Хабаровск · <span class="hl">2026</span></h2>
-    <p class="section-body">25 сентября 2026 года в Хабаровске, в Городском дворце культуры, состоится третья торжественная церемония вручения Дальневосточной кинопремии.</p>
-  </div>
+<section class="page-hero v2">
+  <div class="page-hero-eyebrow"><span class="dot"></span><span>Деловая программа</span></div>
+  <h1 class="page-hero-title" data-text-reveal>Хабаровск <em>24-26 сентября</em></h1>
+  <p class="page-hero-lead">Три дня деловой и&nbsp;образовательной программы перед III церемонией Дальневосточной Кинопремии. Площадка — Городской дворец культуры.</p>
 </section>
-<section class="programme">
-  <div class="prog-grid">
-    <div class="prog-day">
-      <div class="prog-day-label">Форматы</div>
-      <div>
-        <div class="prog-event"><span class="prog-time">01</span><div><div class="prog-name">Мастер-классы</div><div class="prog-detail">Практические встречи с профессионалами киноиндустрии</div></div></div>
-        <div class="prog-event"><span class="prog-time">02</span><div><div class="prog-name">Круглые столы</div><div class="prog-detail">Обсуждение развития регионального кинопроизводства</div></div></div>
-        <div class="prog-event"><span class="prog-time">03</span><div><div class="prog-name">Питчинги проектов</div><div class="prog-detail">Презентация новых дальневосточных историй</div></div></div>
+
+<!-- Animated vertical schedule -->
+<section class="schedule reveal">
+  <header class="schedule-head">
+    <h2>Расписание</h2>
+    <p>Точное время и&nbsp;спикеры будут опубликованы ближе к&nbsp;сентябрю</p>
+  </header>
+
+  {schedule.map((day) => (
+    <div class="schedule-day">
+      <div class="schedule-day-mark">
+        <div class="schedule-day-date">{day.date}</div>
+        <div class="schedule-day-weekday">{day.weekday}</div>
       </div>
+      <ol class="schedule-events">
+        {day.events.map((ev) => (
+          <li class="schedule-event">
+            <time class="schedule-time">{ev.time}</time>
+            <div class="schedule-body">
+              <h3 set:html={ev.title}></h3>
+              <p set:html={ev.detail}></p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
-    <div class="prog-day">
-      <div class="prog-day-label">Церемония</div>
-      <div>
-        <div class="prog-event"><span class="prog-time">25.09</span><div><div class="prog-name">Городской дворец культуры</div><div class="prog-detail">Хабаровск · III Дальневосточная кинопремия</div></div></div>
-        <div class="prog-event highlight"><span class="prog-time">2026</span><div><div class="prog-name">Точная программа будет опубликована ближе к сентябрю</div><div class="prog-detail">После утверждения оргкомитетом</div></div></div>
-      </div>
-    </div>
+  ))}
+</section>
+
+<!-- Accordion: master-classes -->
+<section id="mc" class="masterclasses reveal">
+  <header class="mc-head">
+    <div class="page-hero-eyebrow"><span class="dot"></span><span>Мастер-классы</span></div>
+    <h2 data-text-reveal>Программа практик</h2>
+    <p>Открытые встречи с&nbsp;профессионалами индустрии. Регистрация откроется в&nbsp;июле 2026 года.</p>
+  </header>
+
+  <div class="accordion">
+    {masterclasses.map((m) => (
+      <article class="acc-item" data-acc>
+        <button type="button" class="acc-header" data-acc-toggle aria-expanded="false">
+          <span class="acc-num">{m.num}</span>
+          <span class="acc-title" set:html={m.title}></span>
+          <span class="acc-meta" set:html={m.meta}></span>
+          <span class="acc-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="acc-body" hidden>
+          <p set:html={m.body}></p>
+        </div>
+      </article>
+    ))}
   </div>
 </section>
 

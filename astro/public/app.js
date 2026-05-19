@@ -1,5 +1,118 @@
 // Общая логика сайта: мобильное меню, модалка контакта, отправка /api/lead, простые горизонтальные ленты.
 
+// Accordion (мастер-классы на /program) — раскрывает/сворачивает .acc-body
+(function () {
+  document.querySelectorAll('[data-acc-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('[data-acc]');
+      const body = item.querySelector('.acc-body');
+      const open = item.hasAttribute('data-acc-open');
+      if (open) {
+        item.removeAttribute('data-acc-open');
+        body.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        item.setAttribute('data-acc-open', '');
+        body.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+})();
+
+// Year scrubber (/archive) — клик скроллит к секции года, активный пункт подсвечивается на скролле
+(function () {
+  const scrubber = document.querySelector('[data-year-scrubber]');
+  if (!scrubber) return;
+  const btns = Array.from(scrubber.querySelectorAll('.year-scrubber-btn'));
+  btns.forEach((b) => {
+    b.addEventListener('click', () => {
+      const target = document.querySelector(b.dataset.yearTarget);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  const sections = btns.map((b) => document.querySelector(b.dataset.yearTarget)).filter(Boolean);
+  if (!sections.length || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        const id = '#' + e.target.id;
+        btns.forEach((b) => b.classList.toggle('is-active', b.dataset.yearTarget === id));
+      }
+    });
+  }, { rootMargin: '-30% 0px -50% 0px', threshold: 0 });
+  sections.forEach((s) => io.observe(s));
+})();
+
+// Multi-step form (/submit) — прев/нэкст переключают шаги, прогресс-бар + label
+(function () {
+  const form = document.querySelector('[data-multistep]');
+  if (!form) return;
+  const fieldsets = Array.from(form.querySelectorAll('.msf-fieldset'));
+  const steps = Array.from(form.querySelectorAll('.msf-steps li'));
+  const prev = form.querySelector('[data-msf-prev]');
+  const next = form.querySelector('[data-msf-next]');
+  const bar  = form.querySelector('[data-msf-bar]');
+  const status = form.querySelector('[data-msf-status]');
+  let i = 0;
+  const render = () => {
+    fieldsets.forEach((f, idx) => { f.hidden = idx !== i; });
+    steps.forEach((s, idx) => s.classList.toggle('active', idx <= i));
+    if (bar) bar.style.setProperty('--p', (((i + 1) / fieldsets.length) * 100) + '%');
+    prev.disabled = i === 0;
+    next.textContent = i === fieldsets.length - 1 ? 'Отправить →' : 'Далее →';
+    if (status) status.textContent = `Шаг ${i + 1} из ${fieldsets.length}`;
+  };
+  prev.addEventListener('click', () => { if (i > 0) { i--; render(); } });
+  next.addEventListener('click', () => {
+    if (i < fieldsets.length - 1) { i++; render(); }
+    else {
+      // последний шаг — заглушка
+      status.textContent = 'Спасибо! Мы свяжемся с вами как только откроется приём заявок.';
+      next.disabled = true;
+    }
+  });
+  render();
+})();
+
+// Dropzone — drag&drop файлов, показывает список выбранных
+(function () {
+  document.querySelectorAll('[data-dropzone]').forEach((zone) => {
+    const input = zone.querySelector('[data-dropzone-input]');
+    const list = zone.querySelector('[data-dropzone-files]');
+    if (!input || !list) return;
+    const render = (files) => {
+      list.innerHTML = '';
+      Array.from(files).forEach((f) => {
+        const li = document.createElement('li');
+        li.textContent = `${f.name} · ${(f.size / 1024 / 1024).toFixed(2)} МБ`;
+        list.appendChild(li);
+      });
+    };
+    zone.addEventListener('click', (e) => {
+      if (e.target === input) return;
+      input.click();
+    });
+    zone.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); input.click(); }
+    });
+    input.addEventListener('change', () => render(input.files));
+    ['dragenter','dragover'].forEach((ev) =>
+      zone.addEventListener(ev, (e) => { e.preventDefault(); zone.classList.add('is-drag'); })
+    );
+    ['dragleave','drop'].forEach((ev) =>
+      zone.addEventListener(ev, (e) => { e.preventDefault(); zone.classList.remove('is-drag'); })
+    );
+    zone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer && e.dataTransfer.files;
+      if (files && files.length) {
+        input.files = files;
+        render(files);
+      }
+    });
+  });
+})();
+
 // Sound toggle — переключает иконку, при наличии audio[data-ambient] управляет воспроизведением
 (function () {
   const btn = document.querySelector('[data-sound-toggle]');
