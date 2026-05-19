@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, DragEvent, ChangeEvent } from "react";
+import { useState, useRef } from "react";
+import type { DragEvent, ChangeEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import clsx from "clsx";
 import {
