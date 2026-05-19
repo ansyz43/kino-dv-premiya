@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { MultiStepForm } from "../components/ui/multistep-form";
-import FileUpload from "../components/ui/file-upload";
 ---
 <Layout title={`Подать заявку · Дальневосточная Кинопремия 2026`} active={"submit"}>
 
@@ -16,15 +15,6 @@ import FileUpload from "../components/ui/file-upload";
   <MultiStepForm client:load />
 </section>
 
-<!-- File upload — компонент из 21st-dev (File Upload, motion/react) -->
-<section style="padding:0 24px 96px;background:var(--bg);">
-  <div style="max-width:880px;margin:0 auto;text-align:center;">
-    <div class="page-hero-eyebrow" style="margin-bottom:12px;justify-content:center"><span class="dot"></span><span>Материалы</span></div>
-    <h2 style="font-family:var(--font-display);font-size:clamp(32px,4vw,52px);color:var(--brand-primary);margin:0 0 12px;font-weight:400">Постер · трейлер · документы</h2>
-    <p style="font-family:var(--font-sans);font-size:17px;line-height:1.55;color:var(--text-mid);margin:0 0 24px;max-width:60ch;margin-left:auto;margin-right:auto">Загрузите материалы заявки. Прогресс показывается в реальном времени.</p>
-  </div>
-  <FileUpload client:visible />
-</section>
 
 <!-- Старая самописная форма скрыта на случай отката -->
 <section style="display:none">
