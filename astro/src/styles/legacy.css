@@ -2650,6 +2650,119 @@ footer.split { padding: 0; background: var(--bg); color: var(--text); border-top
   .news-row, .news-row.featured { grid-template-columns: 1fr; gap: 24px; padding: 28px 0; }
 }
 
+/* ════════════════════════════════════════════════
+   BENTO 6 — асимметричная сетка карточек
+   используется на /regulation /expert-council /nominations
+   ════════════════════════════════════════════════ */
+.bento-6 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  padding: 24px 64px 96px;
+  max-width: 1480px;
+  margin: 0 auto;
+}
+.b6-card {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 36px 32px;
+  display: flex; flex-direction: column; gap: 14px;
+  min-height: 280px;
+  cursor: default;
+  overflow: hidden;
+  transition: border-color .35s ease, transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease;
+}
+.b6-card::after {
+  content: ''; position: absolute; left: 0; bottom: -1px;
+  height: 2px; background: var(--brand-gold);
+  width: 100%; transform: scaleX(0); transform-origin: left;
+  transition: transform .5s cubic-bezier(.2,.7,.2,1);
+}
+.b6-card:hover {
+  border-color: var(--brand-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(28,25,21,0.06);
+}
+.b6-card:hover::after { transform: scaleX(1); }
+/* варианты ширины */
+.b6-card.w2 { grid-column: span 2; }
+.b6-card.w3 { grid-column: span 3; }
+.b6-card.w4 { grid-column: span 4; }
+.b6-card.w6 { grid-column: span 6; }
+/* dark / gold modifiers */
+.b6-card.dark {
+  background: var(--brand-primary); border-color: var(--brand-primary);
+}
+.b6-card.dark .b6-card-title { color: var(--text-inv); }
+.b6-card.dark .b6-card-body { color: rgba(255,255,255,0.78); }
+.b6-card.dark .b6-card-num { color: var(--brand-gold); }
+.b6-card.dark .b6-card-tag { color: var(--brand-gold); border-color: rgba(217,157,71,0.4); }
+
+.b6-card.gold {
+  background: var(--brand-gold); border-color: rgba(28,25,21,0.18);
+}
+.b6-card.gold .b6-card-num { color: var(--brand-primary); }
+.b6-card.gold .b6-card-tag { color: var(--brand-primary); border-color: rgba(28,25,21,0.3); }
+
+/* Корпус */
+.b6-card-num {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(48px, 5vw, 84px); line-height: 0.85;
+  letter-spacing: -0.025em; color: var(--brand-primary);
+  margin: 0; align-self: flex-start;
+}
+.b6-card.w6 .b6-card-num,
+.b6-card.w4 .b6-card-num { font-size: clamp(64px, 7vw, 120px); }
+.b6-card-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--brand-gold); font-weight: 700;
+  padding: 6px 10px; border: 1px solid rgba(217,157,71,0.4);
+  align-self: flex-start;
+}
+.b6-card-title {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(20px, 1.8vw, 30px); line-height: 1.15;
+  color: var(--brand-primary); margin: 0;
+  letter-spacing: -0.005em;
+}
+.b6-card.w4 .b6-card-title,
+.b6-card.w6 .b6-card-title { font-size: clamp(26px, 2.5vw, 40px); }
+.b6-card-body {
+  font-family: var(--font-sans); font-size: 15px; line-height: 1.55;
+  color: var(--text-mid); margin: 0;
+  margin-top: auto;
+}
+.b6-card.w4 .b6-card-body,
+.b6-card.w6 .b6-card-body { font-size: 17px; }
+
+/* Декоративный gold-уголок справа-сверху на cards.w4 / w6 */
+.b6-card.feature::before {
+  content: ''; position: absolute; top: 24px; right: 24px;
+  width: 24px; height: 1px; background: var(--brand-gold);
+}
+.b6-card.feature::after {
+  content: ''; position: absolute; top: 24px; right: 24px;
+  width: 1px; height: 24px; background: var(--brand-gold);
+}
+
+/* Малый corner-метка с номером в верхнем-правом углу */
+.b6-card-corner {
+  position: absolute; top: 18px; right: 22px;
+  font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.18em;
+  color: var(--text-soft); text-transform: uppercase; font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .bento-6 { padding: 24px 24px 64px; gap: 12px; grid-template-columns: 1fr; }
+  .b6-card,
+  .b6-card.w2, .b6-card.w3, .b6-card.w4, .b6-card.w6 { grid-column: span 1; min-height: auto; }
+  .b6-card { padding: 24px 20px; }
+  .b6-card-num { font-size: 56px !important; }
+  .b6-card-title { font-size: 21px !important; }
+}
+
 /* ════════ Subscribe panel — gold overlay (как Discover, упирается сверху в footer) ════════ */
 .subscribe-panel {
   position: relative; z-index: 5;
