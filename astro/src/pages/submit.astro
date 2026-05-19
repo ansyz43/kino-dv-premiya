@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { MultiStepForm } from "../components/ui/multistep-form";
 ---
 <Layout title={`Подать заявку · Дальневосточная Кинопремия 2026`} active={"submit"}>
 
@@ -9,8 +10,13 @@ import Layout from "../layouts/Layout.astro";
   <p class="page-hero-lead">Приём заявок откроется в&nbsp;апреле. Точные технические детали будут опубликованы после утверждения оргкомитетом. Сейчас можно оставить контакт и&nbsp;получить уведомление о&nbsp;старте.</p>
 </section>
 
-<!-- Multi-step заявка (поэтапная форма-черновик, отправляет уведомление о готовности подать) -->
-<section class="submit-multistep">
+<!-- Multi-step заявка — компонент из 21st-dev (Multistep Form) -->
+<section class="submit-multistep" style="display:flex;justify-content:center;padding:64px 24px 96px;background:var(--bg);border-top:1px solid var(--border);">
+  <MultiStepForm client:load />
+</section>
+
+<!-- Старая самописная форма скрыта на случай отката -->
+<section style="display:none">
   <form class="msf" data-multistep novalidate onsubmit="return false">
     <div class="msf-progress">
       <div class="msf-bar" data-msf-bar style="--p:33%"></div>

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 @import "./legacy.css";
 
 /* ════════ design tokens (extracted from europeanfilmawards.eu via designlang) ════════ */
@@ -17,6 +18,18 @@
   --font-serif: 'Playfair Display', 'Times New Roman', serif;
   --animate-marquee:          marquee var(--marquee-duration, 40s) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--marquee-duration, 40s) linear infinite;
+  /* shadcn/ui compat tokens (для верстки 21st-dev компонентов как-есть) */
+  --color-background:        #ffffff;
+  --color-foreground:        #1c1915;
+  --color-muted:             #f1f1f1;
+  --color-muted-foreground:  #69727d;
+  --color-border:            #dad8d6;
+  --color-input:             #dad8d6;
+  --color-ring:              #1c1915;
+  --color-primary:           #1c1915;
+  --color-primary-foreground:#ffffff;
+  --color-accent:            #f1f1f1;
+  --color-accent-foreground: #1c1915;
 }
 
 @keyframes marquee {
